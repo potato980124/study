@@ -8,7 +8,7 @@ class App extends Component {
       <div className='App'>
         <Subject title="web" sub="adad"></Subject>
         <Toc></Toc>
-        <Content title="html" text="어쩌구저쩌구"></Content>
+        <Content title="html" text="어쩌구쩌구"></Content>
       </div>
     );
   }
