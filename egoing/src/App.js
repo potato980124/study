@@ -3,7 +3,7 @@ import { useState } from 'react';
 function App() {
   let [mode,setMode] = useState("wellcome");
   let content = null;
-  console.log(setMode);
+  let [id,setId] = useState(null);
   const topics = [
     {id:1,title:'html',content:"html is ..."},
     {id:2,title:'css',content:"css is ..."},
@@ -12,12 +12,19 @@ function App() {
   if(mode === "wellcome"){
     content = <Article title ="welcome" body = "hello,web"></Article> 
   }else if(mode ==="READ"){
-    content = <Article title ="read" body = "hello read"></Article> 
+    for(let i =0; i<topics.length; i++){
+      if(topics.id === id){
+        content = <Article title ="read" body = ""></Article> 
+      }
+    }
   }
   return (
     <div>
       <Header title ="리액트 헤더" onChangeMode={()=>{setMode('wellcome')}} ></Header> 
-      <Nav topics={topics} onChangeMode={(id)=>{setMode('READ')}}></Nav>
+      <Nav topics={topics} onChangeMode={(id)=>{
+        setMode('READ');
+        setMode(id);
+    }}></Nav>
       <Article title="본문"></Article> 
       {content}
     </div>
