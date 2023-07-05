@@ -12,21 +12,24 @@ function App() {
   if(mode === "wellcome"){
     content = <Article title ="welcome" body = "hello,web"></Article> 
   }else if(mode ==="READ"){
+    console.log(id);
+    let title,body = null;
     for(let i =0; i<topics.length; i++){
-      if(topics.id === id){
-        content = <Article title ="read" body = ""></Article> 
+      if(topics[i].id === id){
+        title = topics[i].title;
+        body = topics[i].content;
       }
     }
+    content = <Article title ={title} body = {body}></Article>  
   }
   return (
     <div>
       <Header title ="리액트 헤더" onChangeMode={()=>{setMode('wellcome')}} ></Header> 
       <Nav topics={topics} onChangeMode={(id)=>{
         setMode('READ');
-        setMode(id);
+        setId(id);
     }}></Nav>
-      <Article title="본문"></Article> 
-      {content}
+      {content} 
     </div>
   );
 }
@@ -40,11 +43,10 @@ function Header(props){
       </header>
 }
 function Nav(props){
-  console.log(props);
   const lis = []
   for(let i = 0; i<props.topics.length; i++){
     let t = props.topics[i];
-    lis.push(<li key={t.id}><a href='/' id={t.id} onClick={(e)=>{e.preventDefault(); props.onChangeMode(e.target.id)}}>{t.title}</a></li>)
+    lis.push(<li key={t.id}><a href='/' id={t.id} onClick={(e)=>{e.preventDefault(); props.onChangeMode(Number(e.target.id))}}>{t.title}</a></li>)
   }
   return <nav>
     <ol>
